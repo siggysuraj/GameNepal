@@ -32,6 +32,7 @@ namespace GameNepal.AutomatedUITests
         public void Register_test()
         {
             _driver.Navigate().GoToUrl("http://localhost:49550/Home/Register");
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             _driver.FindElement(By.Id("FirstName"))
                 .SendKeys("TestFirst");
             _driver.FindElement(By.Id("LastName"))
