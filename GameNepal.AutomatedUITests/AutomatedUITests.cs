@@ -13,7 +13,10 @@ namespace GameNepal.AutomatedUITests
 
         public AutomatedUITests()
         {
-            _driver = new ChromeDriver(Environment.CurrentDirectory);
+            
+            var chromeOption = new ChromeOptions();  //add this inorder to run chrome back, it will not open chrome
+            chromeOption.AddArgument("headless");
+            _driver = new ChromeDriver(Environment.CurrentDirectory,chromeOption);
         }
 
         
@@ -62,7 +65,7 @@ namespace GameNepal.AutomatedUITests
              query  .SendKeys("TestName1111");
 
             _driver.FindElement(By.Id("Email"))
-               .SendKeys("test113@abc.com");
+               .SendKeys("test193@abc.com");
             _driver.FindElement(By.Id("Phone"))
                .SendKeys("0912345125");
             _driver.FindElement(By.XPath("//*[@type='radio'][1]")).Click();
@@ -70,13 +73,14 @@ namespace GameNepal.AutomatedUITests
                .SendKeys("TestCity");
             _driver.FindElement(By.XPath("//*[@id='AgeGroup']/option[2]")).Click();
 
-            _driver.FindElement(By.Id("pwdReEntered"))
-               .SendKeys("Test1234@");
-            _driver.FindElement(By.Id("pwdReEntered"))
-               .SendKeys("Test1234@");
+            query = _driver.FindElement(By.Id("Password"));
+            query.SendKeys("Test1234@");
+            query = _driver.FindElement(By.Id("pwdReEntered"));
+             query  .SendKeys("Test1234@");
             _driver.FindElement(By.Id("btnSend"))
                 .Click();
             var wait1 = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            wait1.Until(d => d.Title.StartsWith("Home"));
             Assert.Equal("Home", _driver.Title);
         }
     }
