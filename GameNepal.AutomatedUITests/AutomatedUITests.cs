@@ -17,6 +17,7 @@ namespace GameNepal.AutomatedUITests
             var chromeOption = new ChromeOptions();  //add this inorder to run chrome back, it will not open chrome
             chromeOption.AddArgument("headless");
             _driver = new ChromeDriver(Environment.CurrentDirectory,chromeOption);
+           // _driver = new ChromeDriver(Environment.CurrentDirectory); //if you want to run chrome front
         }
 
         
@@ -54,9 +55,9 @@ namespace GameNepal.AutomatedUITests
                }); */
 
             //   var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
+            IWebElement query;
 
-
-            IWebElement query = _driver.FindElement(By.Id("FirstName"));
+           query = _driver.FindElement(By.Id("FirstName"));
             query  .SendKeys("TestFirst");
 
             // var element = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("FirstName"))
@@ -64,8 +65,9 @@ namespace GameNepal.AutomatedUITests
             query = _driver.FindElement(By.Id("LastName"));
              query  .SendKeys("TestName1111");
 
-            _driver.FindElement(By.Id("Email"))
-               .SendKeys("test193@abc.com");
+            query = _driver.FindElement(By.Id("Email"));
+              query .SendKeys("test194@abc.com");
+
             _driver.FindElement(By.Id("Phone"))
                .SendKeys("0912345125");
             _driver.FindElement(By.XPath("//*[@type='radio'][1]")).Click();
