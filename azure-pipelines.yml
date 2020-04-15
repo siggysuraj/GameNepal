@@ -23,15 +23,13 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '**\*.sln'
-- task: VSTest@2
-  inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          **\*test*.dll
-          !**\*TestAdapter.dll
-          !**\obj\**
-        searchFolder: '$(System.DefaultWorkingDirectory)'
 - task: VisualStudioTestPlatformInstaller@1
   inputs:
     packageFeedSelector: 'nugetOrg'
     versionSelector: 'latestPreRelease'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'Gamenepal1'
+    publishLocation: 'pipeline'
